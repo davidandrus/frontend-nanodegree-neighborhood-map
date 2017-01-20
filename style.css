@@ -1,0 +1,72 @@
+/*
+  #2C3E50 dark blue
+  #E74C3C orange
+  #ECF0F1 cream
+  #3498DB light blue
+  #2980B9 medium blue
+*/
+
+body {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+}
+
+.header {
+  background: #2C3E50;
+  border-bottom: 1px solid #E74C3C;
+  height: 60px;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.app-name {
+  color: #ECF0F1;
+  font-size: 24px;
+  font-weight: 200;
+  line-height: 60px;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar {
+  background-color: #3498DB;
+}
+
+.filter {
+  background-color: #2980B9;
+  border-bottom: 1px solid #ECF0F1;
+  display: flex;
+  padding: 10px;
+}
+
+.filter-input {
+  background-color: #ECF0F1;
+  border-width: 0;
+  flex: 1 1 auto;
+  padding: 10px;
+}
+
+.filter-button {
+  background: #2C3E50;
+  border: 1px solid #ECF0F1;
+  color: #ECF0F1;
+  flex: 0 0 auto;
+  margin-left: 10px;
+  min-width: 50px;
+}
+
+.nav-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-list li {
+  border-bottom: 1px solid #2980B9;
+  padding: 10px;
+}
+
+.nav-list a {
+  color: #ECF0F1;
+  text-decoration: none;
+}
