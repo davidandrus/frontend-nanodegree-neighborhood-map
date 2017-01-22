@@ -74,6 +74,10 @@
     self.loadCountries();
   }
 
+  window.addEventListener('resize', function() {
+    map.fitPins();
+  });
+
   ko.applyBindings(new uiViewModel());
 
 })(gMap)

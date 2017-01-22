@@ -42,6 +42,11 @@
         lng: obj.latlng[1]
       };
       var marker = new GM.Marker({
+        // icon: {
+        //   url: '/flags/' + obj.alpha2Code.toLowerCase() + '.svg',
+        //   size: new GM.Size(20, 15),
+        //   origin: new GM.Point(0, 0)
+        // },
         map: this._map,
         position: position,
         animation: GM.Animation.DROP,

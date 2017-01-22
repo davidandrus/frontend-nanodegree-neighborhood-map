@@ -11,43 +11,48 @@
   <title>Document</title>
 </head>
 <body>
-  <header class="header">
-    <h1 class="app-name">Neighborhood Map</h1>
-  </header>
-  <aside class="sidebar">
-    <div class="filter">
-      <input
-        data-bind="{ value: countryFilter, valueUpdate: 'afterkeydown' }"
-        class="filter-input"
-        type="text"
-        placeholder="filter by keyword"
-      >
-      <button class="filter-button">Go</button>
-    </div>
-    <!-- ko if: countriesLoading -->
-      <div class="loader">
-        <div class="loader-spinner"></div>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="filter">
+        <input
+          data-bind="{ value: countryFilter, valueUpdate: 'afterkeydown' }"
+          class="filter-input"
+          type="text"
+          placeholder="filter by keyword"
+        >
+        <button class="filter-button">Go</button>
       </div>
-    <!-- /ko -->
-    <!-- ko if: countries().length > 0 -->
-      <nav>
-        <ul class="nav-list" data-bind="foreach: filteredCountries">
-          <li><a href="#" data-bind="text: name"></a></li>
-        </ul>
-      </nav>
-    <!-- /ko -->
-    <!-- ko if: countriesError -->
-      <div class="sidebar-error">
-        <p>There was a a problem loading the countries</p>
-        <button
-          class="sidebar-error-button"
-          data-bind="event: { click: loadCountries }">Retry</button>
-      </div>
-    <!-- /ko -->
-  </aside>
-  <main class="main">
-    <div id="map"></div>
-  </main>
+      <!-- ko if: countriesLoading -->
+        <div class="loader">
+          <div class="loader-spinner"></div>
+        </div>
+      <!-- /ko -->
+      <!-- ko if: countries().length > 0 -->
+        <nav class="nav">
+          <ul class="nav-list" data-bind="foreach: filteredCountries">
+            <li><a href="#" data-bind="text: name"></a></li>
+          </ul>
+        </nav>
+      <!-- /ko -->
+      <!-- ko if: countriesError -->
+        <div class="sidebar-error">
+          <p>There was a a problem loading the countries</p>
+          <button
+            class="sidebar-error-button"
+            data-bind="event: { click: loadCountries }">Retry</button>
+        </div>
+      <!-- /ko -->
+    </aside>
+    <main class="main">
+      <header class="header">
+        <h1 class="app-name">Countries of the world</h1>
+      </header>
+      <div id="map"></div>
+    </main>
+    <aside class="info-panel">
+      <h1>That worked yo</h1>
+    </aside>
+  </div>
 
 <!-- https://www.mediawiki.org/wiki/API:Main_page
 https://restcountries.eu/
