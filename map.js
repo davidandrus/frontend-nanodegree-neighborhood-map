@@ -14,7 +14,10 @@
   function Map() {
     this._map = null;
     this._bounds = null;
+    this._baseIcon = '//maps.google.com/mapfiles/ms/icons/red-dot.png';
+    this._clickedIcon = '//maps.google.com/mapfiles/ms/icons/green-dot.png';
     this._markers = {};
+    this._countries = {};
     this._elem = document.getElementById('map');
     readyPromise.then(this.init.bind(this));
   }
@@ -24,20 +27,30 @@
       this._bounds = new GM.LatLngBounds();
       this._map = new GM.Map(this._elem, {
         // should be center of coverage area here,
-       center: { lat: -34.397, lng: 150.644 },
-       zoom: 16,
-       streetViewControl: false,
-       mapTypeControl: false,
-       styles: window.mapStyle,
-      //  styles: [{
-      //    featureType: "transit",
-      //    stylers: [{
-      //      visibility: "off"
-      //    }],
-      //  }],
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 16,
+        streetViewControl: false,
+        mapTypeControl: false,
+        styles: window.mapStyle,
       });
     },
-    addCountryPin(obj, listener) {
+    setCurrentMarker: function(id) {
+      var self = this;
+      _.each(this._markers, function(item, key) {
+        var currentObj = self._countries[key];
+        var currentMarker = self._markers[key];
+        if (currentObj.alpha2Code === id) {
+          self._map.setCenter(currentMarker.getPosition());
+          currentMarker.setZIndex(GM.Marker.MAX_ZINDEX + 1);
+          currentMarker.setIcon(self._clickedIcon);
+          currentMarker.setAnimation(google.maps.Animation.BOUNCE);
+        } else {
+          currentMarker.setIcon(self._baseIcon);
+          currentMarker.setAnimation(null);
+        }
+      })
+    },
+    addCountryPin: function(obj, listener) {
       // prevent error where one country without latng values throws
       if (obj.latlng.length !== 2) { return; }
       var position = {
@@ -54,14 +67,16 @@
         position: position,
         animation: GM.Animation.DROP,
         //label: name,
-        title: obj.name
+        title: obj.name,
+        icon: this._baseIcon
       });
 
       this._markers[obj.alpha2Code] = marker;
+      this._countries[obj.alpha2Code] = obj;
 
       this._bounds.extend(position);
       marker.addListener('click', () => {
-        this._map.setCenter(marker.getPosition());
+        this.setCurrentMarker(obj.alpha2Code);
         listener(obj);
       });
     },
@@ -83,7 +98,10 @@
       // });
     },
     fitPins: function() {
-      this._map.fitBounds(this._bounds);
+      var self = this;;
+      this.ready.then(function() {
+        self._map.fitBounds(self._bounds);
+      });
     },
     ready: readyPromise,
   }

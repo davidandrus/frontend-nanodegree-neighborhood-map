@@ -70,7 +70,9 @@
 
           map.ready.then(function() {
             _.each(self.countries(), function(item) {
-              map.addCountryPin(item, self.setToCountry.bind(this, item));
+              map.addCountryPin(item, function() {
+                self.setToCountry(item);
+              });
             });
             map.fitPins();
           })
@@ -100,7 +102,10 @@
       return filteredCountries;
     });
 
-    self.setToCountry = function(obj) {
+    self.setToCountry = function(obj, e) {
+
+      if (e) { e.preventDefault(); }
+
       self.selectedCountry(_.extend({}, obj, {
         languages: commaizeArray(obj.languages),
         currencies: commaizeArray(obj.currencies),
