@@ -14,16 +14,18 @@
 
   function Map() {
     this._map = null;
+    this._bounds = null;
     this._elem = document.getElementById('map');
     readyPromise.then(this.init.bind(this));
   }
 
   Map.prototype = {
     init: function() {
+      this._bounds = new GM.LatLngBounds();
       this._map = new GM.Map(this._elem, {
         // should be center of coverage area here,
        center: { lat: -34.397, lng: 150.644 },
-       zoom: 1,
+       zoom: 16,
       //  styles: [{
       //    featureType: "transit",
       //    stylers: [{
@@ -31,6 +33,32 @@
       //    }],
       //  }],
       });
+    },
+    addCountryPin(obj) {
+      // prevent error where one country without latng values throws
+      if (obj.latlng.length !== 2) { return; }
+      var position = {
+        lat: obj.latlng[0],
+        lng: obj.latlng[1]
+      };
+      var marker = new GM.Marker({
+        map: this._map,
+        position: position,
+        animation: GM.Animation.DROP,
+        //label: name,
+        title: obj.name
+      });
+
+      this._bounds.extend(position);
+      // marker.addListener('click', () => {
+      //   map.setCenter(marker.getPosition());
+      //   // set active stop icon
+      //
+      //   clickListener(id);
+      // });
+    },
+    fitPins: function() {
+      this._map.fitBounds(this._bounds);
     },
     ready: readyPromise,
   }

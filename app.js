@@ -1,5 +1,7 @@
-(function() {
-  
+(function(map) {
+
+  console.log(map);
+
   /**
    * Gets a list of countries from https://restcountries.eu/rest/v1/all
    * @return {Promise} the promise returned with when successful the array of countries
@@ -43,6 +45,14 @@
         .then(function(response) {
           self.countriesLoading(false);
           self.countries(response);
+
+          map.ready.then(function() {
+            console.log(self.countries());
+            self.countries().forEach(function(item) {
+              map.addCountryPin(item)
+            });
+            map.fitPins();
+          })
         })
         .catch(function() {
           self.countriesLoading(false);
@@ -66,4 +76,4 @@
 
   ko.applyBindings(new uiViewModel());
 
-})()
+})(gMap)
