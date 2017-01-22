@@ -53,7 +53,7 @@ body {
   padding: 10px;
 }
 
-.filter-button {
+button {
   background: #2C3E50;
   border: 1px solid #ECF0F1;
   color: #ECF0F1;
@@ -76,6 +76,24 @@ body {
 .nav-list a {
   color: #ECF0F1;
   text-decoration: none;
+}
+
+.sidebar-error {
+  border: 1px solid #ECF0F1;
+  background-color: #E74C3C;
+  color: #ECF0F1;
+  margin: 0 auto;
+  padding: 10px;
+  text-align: center;
+  width: 250px;
+}
+
+.sidebar-error {
+  margin-top: 10px;
+}
+
+.sidebar-error-button {
+  padding: 5px 10px;
 }
 
 .loader {

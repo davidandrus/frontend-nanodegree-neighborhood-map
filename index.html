@@ -18,7 +18,7 @@
       <input class="filter-input" type="text" placeholder="filter by keyword">
       <button class="filter-button">Go</button>
     </div>
-    <!-- ko if: loading -->
+    <!-- ko if: countriesLoading -->
       <div class="loader">
         <div class="loader-spinner"></div>
       </div>
@@ -29,6 +29,14 @@
           <li><a href="#" data-bind="text: name"></a></li>
         </ul>
       </nav>
+    <!-- /ko -->
+    <!-- ko if: countriesError -->
+      <div class="sidebar-error">
+        <p>There was a a problem loading the countries</p>
+        <button
+          class="sidebar-error-button"
+          data-bind="event: { click: loadCountries }">Retry</button>
+      </div>
     <!-- /ko -->
   </div>
 <!-- https://www.mediawiki.org/wiki/API:Main_page

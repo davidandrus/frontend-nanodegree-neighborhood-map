@@ -4,6 +4,10 @@
  */
 function getCountries() {
   return fetch('https://restcountries.eu/rest/v1/all')
+    // if the api is down return the local copy
+    .catch(function(response) {
+      return fetch('/allCountries.bu.json');
+    })
     .then(function(response) {
       return response.json();
     });
@@ -13,21 +17,26 @@ function uiViewModel() {
   var self = this;
 
   self.countries = ko.observableArray();
-  self.loading = ko.observable(true);
-  self.error = ko.observable(false);
+  self.countriesLoading = ko.observable(false);
+  self.countriesError = ko.observable(false);
 
-  getCountries()
-    .then(function(response) {
-      self.loading(false);
-      self.countries(response);
-      console.log(self.countries())
-    })
-    .catch(function(e) {
-      console.log('error yo', e);
-      self.loading(false);
-      self.error(true);
-    });
+  self.loadCountries = function() {
+    self.countriesLoading(true);
+    self.countriesError(false);
 
+    getCountries()
+      .then(function(response) {
+        self.countriesLoading(false);
+        self.countries(response);
+      })
+      .catch(function() {
+        self.countriesLoading(false);
+        self.countriesError(true);
+      });
+  }
+
+  // do initial load of Countries
+  self.loadCountries();
 }
 
 ko.applyBindings(new uiViewModel());
