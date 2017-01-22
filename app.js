@@ -19,6 +19,7 @@ function uiViewModel() {
   self.countries = ko.observableArray();
   self.countriesLoading = ko.observable(false);
   self.countriesError = ko.observable(false);
+  self.countryFilter = ko.observable('');
 
   self.loadCountries = function() {
     self.countriesLoading(true);
@@ -34,6 +35,15 @@ function uiViewModel() {
         self.countriesError(true);
       });
   }
+
+  self.filteredCountries = ko.computed(function() {
+    if (!self.countryFilter()) {
+      return self.countries();
+    }
+    return self.countries().filter(function(item) {
+      return item.name.toUpperCase().indexOf(self.countryFilter().toUpperCase()) > -1;
+    })
+  });
 
   // do initial load of Countries
   self.loadCountries();

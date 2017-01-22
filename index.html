@@ -15,7 +15,12 @@
   </header>
   <div class="sidebar">
     <div class="filter">
-      <input class="filter-input" type="text" placeholder="filter by keyword">
+      <input
+        data-bind="{ value: countryFilter, valueUpdate: 'afterkeydown' }"
+        class="filter-input"
+        type="text"
+        placeholder="filter by keyword"
+      >
       <button class="filter-button">Go</button>
     </div>
     <!-- ko if: countriesLoading -->
@@ -25,7 +30,7 @@
     <!-- /ko -->
     <!-- ko if: countries().length > 0 -->
       <nav>
-        <ul class="nav-list" data-bind="foreach: countries">
+        <ul class="nav-list" data-bind="foreach: filteredCountries">
           <li><a href="#" data-bind="text: name"></a></li>
         </ul>
       </nav>
