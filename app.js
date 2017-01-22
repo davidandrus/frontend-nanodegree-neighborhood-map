@@ -75,17 +75,17 @@
               });
             });
             map.fitPins();
-          })
+          });
         })
         .catch(function() {
           self.countriesLoading(false);
           self.countriesError(true);
         });
-    }
+    };
 
     ko.extenders.commaizeArray = function(target) {
-      return target.join(',')
-    }
+      return target.join(',');
+    };
 
     // handle filtering based on countries search input value
     self.filteredCountries = ko.computed(function() {
@@ -95,7 +95,7 @@
 
       var filteredCountries =  _.filter(countries, function(item) {
         return _.toUpper(item.name).indexOf(_.toUpper(countryFilter)) > -1;
-      })
+      });
 
       map.updatePins(filteredCountries);
 
@@ -113,7 +113,7 @@
         population: commaizeNumber(obj.population),
         area: commaizeNumber(Math.round(obj.area * 0.621371)) + ' square miles',
       }));
-    }
+    };
 
     // do initial load of Countries
     self.loadCountries();
@@ -125,4 +125,4 @@
 
   ko.applyBindings(new uiViewModel());
 
-})(gMap)
+})(gMap);

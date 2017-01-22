@@ -119,5 +119,5 @@
     "YER": "Yemeni rials",
     "ZAR": "South African rand",
     "ZMK": "Zambian kwachas",
-  }
-})(window)
+  };
+})(window);

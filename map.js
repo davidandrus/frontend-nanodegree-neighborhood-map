@@ -1,8 +1,8 @@
 (function() {
-  let resolveFn;
-  let GM;
+  var resolveFn;
+  var GM;
 
-  var readyPromise = new Promise((resolve, reject) => {
+  var readyPromise = new Promise(function(resolve, reject) {
     resolveFn = resolve;
   });
 
@@ -27,8 +27,8 @@
       this._bounds = new GM.LatLngBounds();
       this._map = new GM.Map(this._elem, {
         // should be center of coverage area here,
-        center: { lat: -34.397, lng: 150.644 },
-        zoom: 16,
+        center: { lat: 0, lng: 0 },
+        zoom: 1,
         streetViewControl: false,
         mapTypeControl: false,
         styles: window.mapStyle,
@@ -48,7 +48,7 @@
           currentMarker.setIcon(self._baseIcon);
           currentMarker.setAnimation(null);
         }
-      })
+      });
     },
     addCountryPin: function(obj, listener) {
       // prevent error where one country without latng values throws
@@ -65,7 +65,6 @@
         // },
         map: this._map,
         position: position,
-        animation: GM.Animation.DROP,
         //label: name,
         title: obj.name,
         icon: this._baseIcon
@@ -75,7 +74,7 @@
       this._countries[obj.alpha2Code] = obj;
 
       this._bounds.extend(position);
-      marker.addListener('click', () => {
+      marker.addListener('click', function() {
         this.setCurrentMarker(obj.alpha2Code);
         listener(obj);
       });
@@ -92,19 +91,19 @@
 
       _.each(this._markers, function(marker, key) {
         marker.setVisible(_.includes(visibleIds, key));
-      })
+      });
       // _.each(this._markers, function(item, key) {
       //
       // });
     },
     fitPins: function() {
-      var self = this;;
+      var self = this;
       this.ready.then(function() {
         self._map.fitBounds(self._bounds);
       });
     },
     ready: readyPromise,
-  }
+  };
 
 
   // window.initMap = function() {
@@ -171,4 +170,4 @@
   window.gMap = new Map();
   window.initMap = initMap;
 
-})(window)
+})(window);

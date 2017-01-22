@@ -183,5 +183,5 @@
     "yi": "Yiddish",
     "yo": "Yoruba",
     "za": "Zhuang, Chuang"
-  }
-})(window)
+  };
+})(window);
