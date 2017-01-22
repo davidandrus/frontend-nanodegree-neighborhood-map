@@ -26,6 +26,9 @@
         // should be center of coverage area here,
        center: { lat: -34.397, lng: 150.644 },
        zoom: 16,
+       streetViewControl: false,
+       mapTypeControl: false,
+       styles: window.mapStyle,
       //  styles: [{
       //    featureType: "transit",
       //    stylers: [{

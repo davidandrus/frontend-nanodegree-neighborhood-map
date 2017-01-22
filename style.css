@@ -116,21 +116,18 @@ button {
 
 /* MAIN */
 .main {
-  border: 1px solid red;
-  /*height: calc(100vh - 60px);*/
   flex: 0 0 100vw;
 }
 
 .main #map {
-  border: 1px solid blue;
   height: 100%;
   width: 100%;
 }
 
-/*.info-panel {
-  background: blue;
+.info-panel {
+  background: #f1f8fd;
   flex: 0 0 calc(100vh - 60px);
-}*/
+}
 
 /* LOADER */
 .loader {
@@ -184,6 +181,7 @@ button {
     left: 0;
     bottom: 0px;
     width: 280px;
+    z-index: 500;
   }
 
   .main {
@@ -195,18 +193,20 @@ button {
   }
 
   .main #map {
+    border-left: 1px solid #E74C3C;
     right: 0;
     top: 0px;
     height: 50vh;
   }
 
   .info-panel {
+    border-left: 1px solid #E74C3C;
     position: absolute;
+    padding: 20px;
     left: 280px;
     right: 0px;
     bottom: 0px;
     height: 50vh;
-    z-index: 5000;
   }
 
   .nav {
