@@ -19,21 +19,21 @@
       <button class="filter-button">Go</button>
     </div>
     <nav>
-      <ul class="nav-list">
-        <li><a href="#">This is a link it should work at some point</a></li>
-        <li><a href="#">This is a link it should work at some point</a></li>
-        <li><a href="#">This is a link it should work at some point</a></li>
-        <li><a href="#">This is a link it should work at some point</a></li>
-        <li><a href="#">This is a link it should work at some point</a></li>
-        <li><a href="#">This is a link it should work at some point</a></li>
-        <li><a href="#">This is a link it should work at some point</a></li>
-        <li><a href="#">This is a link it should work at some point</a></li>
-        <li><a href="#">This is a link it should work at some point</a></li>
-        <li><a href="#">This is a link it should work at some point</a></li>
+      <ul class="nav-list" data-bind="foreach: countries">
+        <li><a href="#" data-bind="text: name"></a></li>
       </ul>
     </nav>
   </div>
+<!-- https://www.mediawiki.org/wiki/API:Main_page
+https://restcountries.eu/
+http://flags.fmcdn.net/data/flags/normal/jp.png
+http://api.giphy.com/v1/gifs/search?q=finland&api_key=dc6zaTOxFJmzC -->
+<!-- http://www.last.fm/api/show/geo.getTopTracks
+http://sunrise-sunset.org/api
+-->
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fetch/2.0.2/fetch.min.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
