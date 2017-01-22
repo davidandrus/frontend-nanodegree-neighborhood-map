@@ -7,6 +7,10 @@
   #2980B9 medium blue
 */
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Lato', sans-serif;
   font-size: 16px;
@@ -31,6 +35,8 @@ body {
 
 .sidebar {
   background-color: #3498DB;
+  display: block;
+  padding-bottom: 20px;
 }
 
 .filter {
@@ -70,4 +76,33 @@ body {
 .nav-list a {
   color: #ECF0F1;
   text-decoration: none;
+}
+
+.loader {
+  display: block;
+  height: 40px;
+  width: 40px;
+  margin: 20px auto 0;
+  position: relative;
+}
+
+/* https://codepen.io/Sirop/pen/AvHqK */
+.loader-spinner {
+  animation:rotate360 1s linear infinite;
+  border-bottom:4px solid transparent;
+  border-left:4px solid #ECF0F1;
+  border-right: 4px solid #ECF0F1;
+  border-radius:50%;
+  border-top: 4px solid transparent;
+  bottom:0;
+  height:40px;
+  left:0;
+  margin:auto;
+  right:0;
+  top:0;
+  width:40px;
+}
+
+@keyframes rotate360 {
+  100% {transform:rotate(360deg);}
 }

@@ -18,11 +18,18 @@
       <input class="filter-input" type="text" placeholder="filter by keyword">
       <button class="filter-button">Go</button>
     </div>
-    <nav>
-      <ul class="nav-list" data-bind="foreach: countries">
-        <li><a href="#" data-bind="text: name"></a></li>
-      </ul>
-    </nav>
+    <!-- ko if: loading -->
+      <div class="loader">
+        <div class="loader-spinner"></div>
+      </div>
+    <!-- /ko -->
+    <!-- ko if: countries().length > 0 -->
+      <nav>
+        <ul class="nav-list" data-bind="foreach: countries">
+          <li><a href="#" data-bind="text: name"></a></li>
+        </ul>
+      </nav>
+    <!-- /ko -->
   </div>
 <!-- https://www.mediawiki.org/wiki/API:Main_page
 https://restcountries.eu/
