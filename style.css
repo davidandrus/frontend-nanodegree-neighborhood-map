@@ -39,7 +39,8 @@ a:hover {
 /* .container */
 .container {
   display: flex;
-  transform: translateX(-280px)
+  transform: translateX(-280px);
+  transition: transform .3s;
 }
 
 .nav-open .container {
@@ -47,7 +48,7 @@ a:hover {
 }
 
 .info-panel-open .container {
-  transform: translateX(calc(-1 * (280px + 90vw)));
+  transform: translateX(calc(-1 * (280px + 400px)));
 }
 
 /* HEADER */
@@ -159,9 +160,11 @@ a:hover {
 
 .info-panel {
   background: #f1f8fd;
-  flex: 0 0 90vw;
+  flex: 0 0 400px;
   height: 100vh;
   overflow: auto;
+  padding: 20px;
+  width: 400px;
 }
 
 .info-panel-flag {

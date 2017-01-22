@@ -53,6 +53,7 @@
     self.countriesError = ko.observable(false);
     self.countryFilter = ko.observable('');
     self.selectedCountry = ko.observable(null);
+    self.view = ko.observable('map');
 
     /**
      * gets countries and loads into UI then sets loading and error states accordingly
@@ -115,6 +116,11 @@
       }));
 
       map.setCurrentMarker(obj.alpha2Code);
+      self.view('infoPanel');
+    };
+
+    self.setView = function(view) {
+      self.view(view);
     };
 
     // do initial load of Countries

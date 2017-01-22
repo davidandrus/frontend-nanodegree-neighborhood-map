@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=false">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="//fonts.googleapis.com/css?family=Lato" rel="stylesheet">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.8.0/css/flag-icon.min.css">
   <link rel="stylesheet" href="style.css">
-  <title>Document</title>
+  <title>Countries of the world</title>
 </head>
-<body class="">
+<body data-bind="css: { 'nav-open' : view() === 'nav', 'info-panel-open': view() === 'infoPanel' }">
   <div class="container">
     <aside class="sidebar">
       <div class="filter">
@@ -51,6 +51,7 @@
     </aside>
     <main class="main">
       <header class="header">
+        <button data-bind="event: { click: function(data, event) { setView('nav') }}">Open Nav</button>
         <h1 class="app-name">Countries of the world</h1>
       </header>
       <div id="map"></div>
