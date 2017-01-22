@@ -39,8 +39,23 @@
       _.each(this._markers, function(item, key) {
         var currentObj = self._countries[key];
         var currentMarker = self._markers[key];
+
+
         if (currentObj.alpha2Code === id) {
-          self._map.setCenter(currentMarker.getPosition());
+          var geocoder = new GM.Geocoder();
+          geocoder.geocode({
+            componentRestrictions: {
+              country: id
+            },
+          }, function(results, status) {
+            var bounds;
+            if (status == GM.GeocoderStatus.OK) {
+              bounds = results[0].geometry.viewport;
+              bounds.extend(currentMarker.getPosition());
+              self._map.setCenter(results[0].geometry.location);
+              self._map.fitBounds(bounds);
+            }
+          });
           currentMarker.setZIndex(GM.Marker.MAX_ZINDEX + 1);
           currentMarker.setIcon(self._clickedIcon);
           currentMarker.setAnimation(google.maps.Animation.BOUNCE);
@@ -51,6 +66,7 @@
       });
     },
     addCountryPin: function(obj, listener) {
+      var self = this;
       // prevent error where one country without latng values throws
       if (obj.latlng.length !== 2) { return; }
       var position = {
@@ -75,7 +91,7 @@
 
       this._bounds.extend(position);
       marker.addListener('click', function() {
-        this.setCurrentMarker(obj.alpha2Code);
+        self.setCurrentMarker(obj.alpha2Code);
         listener(obj);
       });
     },
