@@ -39,6 +39,15 @@ a:hover {
 /* .container */
 .container {
   display: flex;
+  transform: translateX(-280px)
+}
+
+.nav-open .container {
+  transform: translateX(0px);
+}
+
+.info-panel-open .container {
+  transform: translateX(calc(-1 * (280px + 90vw)));
 }
 
 /* HEADER */
@@ -66,6 +75,11 @@ a:hover {
   display: block;
   padding-bottom: 20px;
   flex: 0 0 280px;
+}
+
+.nav {
+  height: calc(100vh - 60px);
+  overflow: auto;
 }
 
 /* filter */
@@ -133,6 +147,7 @@ a:hover {
 /* MAIN */
 .main {
   flex: 0 0 100vw;
+  height: 100vh
 }
 
 .main #map {
@@ -144,7 +159,8 @@ a:hover {
 
 .info-panel {
   background: #f1f8fd;
-  flex: 0 0 calc(100vh - 60px);
+  flex: 0 0 90vw;
+  height: 100vh;
   overflow: auto;
 }
 
@@ -194,7 +210,7 @@ a:hover {
   100% {transform:rotate(360deg);}
 }
 
-@media screen and (min-width: 768px) {
+/*@media screen and (min-width: 768px) {
 
   .container {
     display: block;
@@ -248,4 +264,4 @@ a:hover {
     height: calc(100vh - 120px);
     overflow: auto;
   }
-}
+}*/
