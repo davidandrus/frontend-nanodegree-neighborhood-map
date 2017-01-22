@@ -24,8 +24,9 @@
 
   Map.prototype = {
     init: function() {
-      this._bounds = new GM.LatLngBounds();
-      this._map = new GM.Map(this._elem, {
+      var self = this;
+      self._bounds = new GM.LatLngBounds();
+      self._map = new GM.Map(self._elem, {
         // should be center of coverage area here,
         center: { lat: 0, lng: 0 },
         zoom: 1,
@@ -33,6 +34,7 @@
         mapTypeControl: false,
         styles: window.mapStyle,
       });
+
     },
     setCurrentMarker: function(id) {
       var self = this;
@@ -143,7 +145,7 @@
   //      }],
   //     });
   //   }
-  //
+  //results[0].geometry.viewport
   //   setBusStops(stops, clickListener) {
   //     const map = this._map;
   //     stops.forEach(({ lat, lon, name, id }) => {

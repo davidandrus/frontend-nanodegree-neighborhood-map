@@ -113,6 +113,8 @@
         population: commaizeNumber(obj.population),
         area: commaizeNumber(Math.round(obj.area * 0.621371)) + ' square miles',
       }));
+
+      map.setCurrentMarker(obj.alpha2Code);
     };
 
     // do initial load of Countries
