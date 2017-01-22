@@ -9,7 +9,6 @@
   function initMap() {
     GM = google.maps;
     resolveFn();
-    console.log(readyPromise);
   }
 
   function Map() {

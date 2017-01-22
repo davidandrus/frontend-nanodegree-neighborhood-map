@@ -30,7 +30,13 @@
       <!-- ko if: countries().length > 0 -->
         <nav class="nav">
           <ul class="nav-list" data-bind="foreach: filteredCountries">
-            <li><a href="#" data-bind="text: name"></a></li>
+            <li>
+              <a
+                href="#"
+                data-bind="text: name, event: { click: $parent.setToCountry }"
+              >
+              </a>
+            </li>
           </ul>
         </nav>
       <!-- /ko -->
@@ -50,7 +56,75 @@
       <div id="map"></div>
     </main>
     <aside class="info-panel">
-      <h1>Click a pin on the map or fron the sidebar to see more info</h1>
+      <div ></div>
+      <!-- ko if: !selectedCountry() -->
+        <h1>Click a pin on the map or fron the sidebar to see more info</h1>
+      <!-- /ko -->
+      <div data-bind="with: selectedCountry">
+        <h1 data-bind="text: name"></h1>
+        <img class="info-panel-flag"
+          data-bind="attr: { src: flagUrl }">
+        <div class="info-panel-item">
+          <span class="info-panel-item-label">Capital City:</span>
+          <span
+            class="item-panel-item-value"
+            data-bind="text: capital">
+          </span>
+        </div>
+        <div class="info-panel-item">
+          <span class="info-panel-item-label">Population:</span>
+          <span
+            class="item-panel-item-value"
+            data-bind="text: population">
+          </span>
+        </div>
+        <div class="info-panel-item">
+          <span class="info-panel-item-label">Region:</span>
+          <span
+            class="item-panel-item-value"
+            data-bind="text: region">
+          </span>
+        </div>
+        <div class="info-panel-item">
+          <span class="info-panel-item-label">Sub-region:</span>
+          <span
+            class="item-panel-item-value"
+            data-bind="text: subregion">
+          </span>
+        </div>
+        <div class="info-panel-item">
+          <span class="info-panel-item-label">area:</span>
+          <span
+            class="item-panel-item-value"
+            data-bind="text: area">
+          </span>
+        </div>
+        <!-- ko if: languages -->
+        <div class="info-panel-item">
+          <span class="info-panel-item-label">language:</span>
+          <span
+            class="item-panel-item-value"
+            data-bind="text: languages">
+          </span>
+        </div>
+        <!-- /ko -->
+        <div class="info-panel-item">
+          <span class="info-panel-item-label">timezones:</span>
+          <span
+            class="item-panel-item-value"
+            data-bind="text: timezones">
+          </span>
+        </div>
+        <!-- ko if: currencies -->
+        <div class="info-panel-item">
+          <span class="info-panel-item-label">currency:</span>
+          <span
+            class="item-panel-item-value"
+            data-bind="text: currencies">
+          </span>
+        </div>
+        <!-- /ko -->
+      </div>
     </aside>
   </div>
 
@@ -66,9 +140,12 @@ http://stackoverflow.com/questions/2265055/how-to-get-google-maps-api-to-set-the
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/fetch/2.0.2/fetch.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.0.5/es6-promise.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwr7QxnLXALgyvc3vbAqcsRrwJmSWrlIk&callback=initMap" async defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/es6-promise/4.0.5/es6-promise.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+  <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyAwr7QxnLXALgyvc3vbAqcsRrwJmSWrlIk&callback=initMap" async defer></script>
   <script src="mapStyle.js"></script>
+  <script src="currency.js"></script>
+  <script src="languages.js"></script>
   <script src="map.js"></script>
   <script src="app.js"></script>
 </body>

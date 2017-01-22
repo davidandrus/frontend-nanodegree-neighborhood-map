@@ -1,6 +1,29 @@
 (function(map) {
 
-  console.log(map);
+  function modifyResponse(response) {
+
+    return _.map(response, function(item) {
+      return _.extend({}, item, {
+        flagUrl: '/flags/' +
+          item.alpha2Code.toLowerCase() + '.svg',
+        languages: item.languages.map(function(code) {
+          return languages[code];
+        }),
+        currencies: item.currencies.map(function(code) {
+          return currencies[code];
+        })
+      });
+
+    });
+  }
+
+  function commaizeNumber(number) {
+    return number.toLocaleString(number);
+  }
+
+  function commaizeArray(arr) {
+    return arr.join(', ');
+  }
 
   /**
    * Gets a list of countries from https://restcountries.eu/rest/v1/all
@@ -14,11 +37,8 @@
       })
       .then(function(response) {
         return response.json();
-      });
-  }
-
-  function initMap() {
-
+      })
+       .then(modifyResponse);
   }
 
   /**
@@ -32,6 +52,7 @@
     self.countriesLoading = ko.observable(false);
     self.countriesError = ko.observable(false);
     self.countryFilter = ko.observable('');
+    self.selectedCountry = ko.observable(null);
 
     /**
      * gets countries and loads into UI then sets loading and error states accordingly
@@ -43,12 +64,12 @@
 
       getCountries()
         .then(function(response) {
+
           self.countriesLoading(false);
           self.countries(response);
 
           map.ready.then(function() {
-            console.log(self.countries());
-            self.countries().forEach(function(item) {
+            _.each(self.countries(), function(item) {
               map.addCountryPin(item)
             });
             map.fitPins();
@@ -60,15 +81,30 @@
         });
     }
 
+    ko.extenders.commaizeArray = function(target) {
+      return target.join(',')
+    }
+
     // handle filtering based on countries search input value
     self.filteredCountries = ko.computed(function() {
-      if (!self.countryFilter()) {
-        return self.countries();
-      }
-      return self.countries().filter(function(item) {
-        return item.name.toUpperCase().indexOf(self.countryFilter().toUpperCase()) > -1;
+      var countries = self.countries();
+      var countryFilter = _.trim(self.countryFilter());
+      if (!countryFilter) { return countries; }
+
+      return _.filter(countries, function(item) {
+        return _.toUpper(item.name).indexOf(_.toUpper(countryFilter)) > -1;
       })
     });
+
+    self.setToCountry = function(obj) {
+      self.selectedCountry(_.extend({}, obj, {
+        languages: commaizeArray(obj.languages),
+        currencies: commaizeArray(obj.currencies),
+        timezones: commaizeArray(obj.timezones),
+        population: commaizeNumber(obj.population),
+        area: commaizeNumber(obj.area * 0.621371) + ' square miles',
+      }));
+    }
 
     // do initial load of Countries
     self.loadCountries();

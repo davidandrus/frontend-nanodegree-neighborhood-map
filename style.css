@@ -30,7 +30,6 @@ button {
   display: flex;
 }
 
-
 /* HEADER */
 .header {
   background: #2C3E50;
@@ -84,12 +83,18 @@ button {
 
 .nav-list li {
   border-bottom: 1px solid #2980B9;
-  padding: 10px;
 }
 
 .nav-list a {
   color: #ECF0F1;
+  display: block;
+  padding: 10px;
   text-decoration: none;
+  transition: background-color .2s linear;
+}
+
+.nav-list a:hover {
+  background-color: #2980B9;
 }
 
 .sidebar-error {
@@ -124,9 +129,26 @@ button {
   width: 100%;
 }
 
+/* info-panel */
+
 .info-panel {
   background: #f1f8fd;
   flex: 0 0 calc(100vh - 60px);
+  overflow: auto;
+}
+
+.info-panel-flag {
+  width: 250px;
+}
+
+.info-panel-item {
+  margin-bottom: 10px;
+}
+
+.info-panel-item-label {
+  display: inline-block;
+  font-weight: bold;
+  text-align: right;
 }
 
 /* LOADER */
