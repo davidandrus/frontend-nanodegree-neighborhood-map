@@ -29,6 +29,13 @@ h1 {
   color: #2C3E50;
 }
 
+a,
+a:visited,
+a:active,
+a:hover {
+  color: #E74C3C;
+}
+
 /* .container */
 .container {
   display: flex;

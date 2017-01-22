@@ -14,8 +14,8 @@
   function Map() {
     this._map = null;
     this._bounds = null;
-    this._baseIcon = '//maps.google.com/mapfiles/ms/icons/red-dot.png';
-    this._clickedIcon = '//maps.google.com/mapfiles/ms/icons/green-dot.png';
+    this._baseIcon = '/blue-dot.png';
+    this._clickedIcon = '/orange-dot.png';
     this._markers = {};
     this._countries = {};
     this._elem = document.getElementById('map');
