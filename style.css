@@ -25,6 +25,10 @@ button {
   min-width: 50px;
 }
 
+h1 {
+  color: #2C3E50;
+}
+
 /* .container */
 .container {
   display: flex;
@@ -138,6 +142,7 @@ button {
 }
 
 .info-panel-flag {
+  margin-bottom: 20px;
   width: 250px;
 }
 
@@ -146,6 +151,7 @@ button {
 }
 
 .info-panel-item-label {
+  color: #2C3E50;
   display: inline-block;
   font-weight: bold;
   text-align: right;

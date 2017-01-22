@@ -70,7 +70,7 @@
 
           map.ready.then(function() {
             _.each(self.countries(), function(item) {
-              map.addCountryPin(item)
+              map.addCountryPin(item, self.setToCountry.bind(this, item));
             });
             map.fitPins();
           })
@@ -91,9 +91,13 @@
       var countryFilter = _.trim(self.countryFilter());
       if (!countryFilter) { return countries; }
 
-      return _.filter(countries, function(item) {
+      var filteredCountries =  _.filter(countries, function(item) {
         return _.toUpper(item.name).indexOf(_.toUpper(countryFilter)) > -1;
       })
+
+      map.updatePins(filteredCountries);
+
+      return filteredCountries;
     });
 
     self.setToCountry = function(obj) {
@@ -102,7 +106,7 @@
         currencies: commaizeArray(obj.currencies),
         timezones: commaizeArray(obj.timezones),
         population: commaizeNumber(obj.population),
-        area: commaizeNumber(obj.area * 0.621371) + ' square miles',
+        area: commaizeNumber(Math.round(obj.area * 0.621371)) + ' square miles',
       }));
     }
 

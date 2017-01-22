@@ -14,6 +14,7 @@
   function Map() {
     this._map = null;
     this._bounds = null;
+    this._markers = {};
     this._elem = document.getElementById('map');
     readyPromise.then(this.init.bind(this));
   }
@@ -36,7 +37,7 @@
       //  }],
       });
     },
-    addCountryPin(obj) {
+    addCountryPin(obj, listener) {
       // prevent error where one country without latng values throws
       if (obj.latlng.length !== 2) { return; }
       var position = {
@@ -56,12 +57,29 @@
         title: obj.name
       });
 
+      this._markers[obj.alpha2Code] = marker;
+
       this._bounds.extend(position);
-      // marker.addListener('click', () => {
-      //   map.setCenter(marker.getPosition());
-      //   // set active stop icon
+      marker.addListener('click', () => {
+        this._map.setCenter(marker.getPosition());
+        listener(obj);
+      });
+    },
+    /**
+     * hides any filtered out pins while keeping the matching pins
+     * @param  {Array} items the collection of items
+     * @return {Undefined}
+     */
+    updatePins: function(items) {
+      var visibleIds = _.map(items, function(item) {
+        return item.alpha2Code;
+      });
+
+      _.each(this._markers, function(marker, key) {
+        marker.setVisible(_.includes(visibleIds, key));
+      })
+      // _.each(this._markers, function(item, key) {
       //
-      //   clickListener(id);
       // });
     },
     fitPins: function() {
