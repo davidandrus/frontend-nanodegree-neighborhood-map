@@ -76,6 +76,7 @@ a:hover {
 /* == Sidebar */
 
 .sidebar {
+  background-color: #3498DB;
   display: block;
   left: 0;
   opacity: .9;
