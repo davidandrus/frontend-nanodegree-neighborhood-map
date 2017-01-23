@@ -47,10 +47,6 @@
    */
   function getCountries() {
     return fetch('//restcountries.eu/rest/v1/all')
-      // if the api is down return the local copy
-      .catch(function(response) {
-        return fetch('js/allCountries.bu.json');
-      })
       .then(function(response) {
         return response.json();
       })
@@ -59,9 +55,9 @@
 
   /**
    * The ViewModel for the UI
-   * @return {undefined}
+   * @constructor
    */
-  function uiViewModel() {
+  function UiViewModel() {
     var self = this;
 
     // the collection of country objects
@@ -203,6 +199,6 @@
     map.fitPins();
   });
 
-  ko.applyBindings(new uiViewModel());
+  ko.applyBindings(new UiViewModel());
 
 })(gMap);
