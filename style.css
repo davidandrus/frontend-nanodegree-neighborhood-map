@@ -16,15 +16,6 @@ body {
   font-size: 16px;
 }
 
-button {
-  background: #2C3E50;
-  border: 1px solid #ECF0F1;
-  color: #ECF0F1;
-  flex: 0 0 auto;
-  margin-left: 10px;
-  min-width: 50px;
-}
-
 h1 {
   color: #2C3E50;
 }
@@ -36,19 +27,31 @@ a:hover {
   color: #E74C3C;
 }
 
+.button-pull {
+  background: #f1f8fd;
+  border-width: 0;
+  color: #2C3E50;
+  font-size: 30px;
+  height: 60px;
+  margin: 0;
+  opacity: .9;
+  padding: 0;
+  width: 60px;
+  position: absolute;
+  text-transform:uppercase;
+}
+
+
 /* .container */
 .container {
   display: flex;
-  transform: translateX(-280px);
+  /*transform: translateX(-280px);*/
   transition: transform .3s;
 }
 
-.nav-open .container {
-  transform: translateX(0px);
-}
 
 .info-panel-open .container {
-  transform: translateX(calc(-1 * (280px + 400px)));
+  /*transform: translateX(calc(-1 * (280px + 400px)));*/
 }
 
 /* HEADER */
@@ -65,7 +68,7 @@ a:hover {
   font-size: 24px;
   font-weight: 200;
   line-height: 60px;
-  margin: 0;
+  margin: 0 0 0 70px;
   padding: 0;
 }
 
@@ -75,8 +78,28 @@ a:hover {
   background-color: #3498DB;
   display: block;
   padding-bottom: 20px;
-  flex: 0 0 280px;
+  opacity: .9;
+  position: fixed;
+  left: 0;
+  width: 280px;
+  transform: translateX(-280px);
+  transition: transform .3s;
+  z-index: 2;
 }
+
+.sidebar-toggle {
+  position: absolute;
+  right: -60px;
+  top: 0px;
+  left:
+}
+
+
+
+.nav-open .sidebar {
+  transform: translateX(0px);
+}
+
 
 .nav {
   height: calc(100vh - 60px);
@@ -148,7 +171,7 @@ a:hover {
 /* MAIN */
 .main {
   flex: 0 0 100vw;
-  height: 100vh
+  height: calc(100vh - 60px);
 }
 
 .main #map {
@@ -160,11 +183,35 @@ a:hover {
 
 .info-panel {
   background: #f1f8fd;
-  flex: 0 0 400px;
   height: 100vh;
+  opacity: .9;
+  position: fixed;
+  width: 100%;
+  right: 0;
+  left: 0;
+  height: calc(100vh - 50px);
+  transform: translateY(100vh);
+  transition: transform .3s;
+  z-index: 3;
+}
+
+.info-panel-open .info-panel {
+  transform: translateY(60px);
+}
+
+.info-panel-scroller {
+  height: 100%;
   overflow: auto;
   padding: 20px;
-  width: 400px;
+}
+
+.info-panel-pull {
+  top: -60px;
+  left: 0;
+}
+
+.info-panel-pull img {
+  animation: bounce 3s cubic-bezier(1, 0, 0, 1) infinite;
 }
 
 .info-panel-flag {
@@ -211,6 +258,12 @@ a:hover {
 
 @keyframes rotate360 {
   100% {transform:rotate(360deg);}
+}
+
+@keyframes bounce {
+  0% {transform: rotateY(0)}
+  80% { tranform: rotateY(10deg)}
+  100% {transform: rotateY(360deg)}
 }
 
 /*@media screen and (min-width: 768px) {

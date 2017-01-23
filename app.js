@@ -90,15 +90,20 @@
 
     // handle filtering based on countries search input value
     self.filteredCountries = ko.computed(function() {
+      console.log('filtering');
       var countries = self.countries();
       var countryFilter = _.trim(self.countryFilter());
-      if (!countryFilter) { return countries; }
-
-      var filteredCountries =  _.filter(countries, function(item) {
-        return _.toUpper(item.name).indexOf(_.toUpper(countryFilter)) > -1;
-      });
+      var filteredCountries;
+      if (countryFilter === '') {
+        filteredCountries = countries;
+      } else {
+        filteredCountries =  _.filter(countries, function(item) {
+          return _.toUpper(item.name).indexOf(_.toUpper(countryFilter)) > -1;
+        });
+      }
 
       map.updatePins(filteredCountries);
+      map.fitPins();
 
       return filteredCountries;
     });
@@ -116,11 +121,15 @@
       }));
 
       map.setCurrentMarker(obj.alpha2Code);
-      self.view('infoPanel');
+      self.view('');
     };
 
     self.setView = function(view) {
       self.view(view);
+    };
+
+    self.toggleView = function(view) {
+      self.view(self.view() === view ? '' : view);
     };
 
     // do initial load of Countries

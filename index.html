@@ -13,14 +13,18 @@
 <body data-bind="css: { 'nav-open' : view() === 'nav', 'info-panel-open': view() === 'infoPanel' }">
   <div class="container">
     <aside class="sidebar">
+      <button
+        class="sidebar-toggle button-pull"
+        data-bind="event: { click: function(data, event) { toggleView('nav') }}">
+        <img src="search.png" alt="search">
+      </button>
       <div class="filter">
         <input
-          data-bind="{ value: countryFilter, valueUpdate: 'afterkeydown' }"
+          data-bind="{ textInput: countryFilter }"
           class="filter-input"
           type="text"
           placeholder="filter by keyword"
         >
-        <button class="filter-button">Go</button>
       </div>
       <!-- ko if: countriesLoading -->
         <div class="loader">
@@ -51,81 +55,90 @@
     </aside>
     <main class="main">
       <header class="header">
-        <button data-bind="event: { click: function(data, event) { setView('nav') }}">Open Nav</button>
         <h1 class="app-name">Countries of the world</h1>
       </header>
       <div id="map"></div>
     </main>
     <aside class="info-panel">
-      <div ></div>
-      <!-- ko if: !selectedCountry() -->
-        <h1>Click a pin on the map or fron the sidebar to see more info</h1>
-      <!-- /ko -->
-      <div data-bind="with: selectedCountry">
-        <h1 data-bind="text: name"></h1>
-        <img class="info-panel-flag"
-          data-bind="attr: { src: flagUrl }">
-        <div class="info-panel-item">
-          <span class="info-panel-item-label">Capital City:</span>
-          <span
-            class="item-panel-item-value"
-            data-bind="text: capital">
-          </span>
-        </div>
-        <div class="info-panel-item">
-          <span class="info-panel-item-label">Population:</span>
-          <span
-            class="item-panel-item-value"
-            data-bind="text: population">
-          </span>
-        </div>
-        <div class="info-panel-item">
-          <span class="info-panel-item-label">Region:</span>
-          <span
-            class="item-panel-item-value"
-            data-bind="text: region">
-          </span>
-        </div>
-        <div class="info-panel-item">
-          <span class="info-panel-item-label">Sub-region:</span>
-          <span
-            class="item-panel-item-value"
-            data-bind="text: subregion">
-          </span>
-        </div>
-        <div class="info-panel-item">
-          <span class="info-panel-item-label">Area:</span>
-          <span
-            class="item-panel-item-value"
-            data-bind="text: area">
-          </span>
-        </div>
-        <!-- ko if: languages -->
-        <div class="info-panel-item">
-          <span class="info-panel-item-label">Languages:</span>
-          <span
-            class="item-panel-item-value"
-            data-bind="text: languages">
-          </span>
-        </div>
+      <!-- ko if: selectedCountry() -->
+      <button
+        class="info-panel-pull button-pull"
+        data-bind="event: { click: function(data, event) { toggleView('infoPanel') }}">
+        <img src="orange-dot.png" alt="Pin Info">
+      </button>
+      <!--/ko -->
+      <div class="info-panel-scroller">
+        <!-- ko if: !selectedCountry() -->
+          <h1>Click a pin on the map or fron the sidebar to see more info</h1>
         <!-- /ko -->
-        <div class="info-panel-item">
-          <span class="info-panel-item-label">Timezones:</span>
-          <span
-            class="item-panel-item-value"
-            data-bind="text: timezones">
-          </span>
+        <div data-bind="with: selectedCountry">
+          <h1 data-bind="text: name"></h1>
+          <img
+            alt="flag"
+            class="info-panel-flag"
+            data-bind="attr: { src: flagUrl }">
+          <div class="info-panel-item">
+            <span class="info-panel-item-label">Capital City:</span>
+            <span
+              class="item-panel-item-value"
+              data-bind="text: capital">
+            </span>
+          </div>
+          <div class="info-panel-item">
+            <span class="info-panel-item-label">Population:</span>
+            <span
+              class="item-panel-item-value"
+              data-bind="text: population">
+            </span>
+          </div>
+          <div class="info-panel-item">
+            <span class="info-panel-item-label">Region:</span>
+            <span
+              class="item-panel-item-value"
+              data-bind="text: region">
+            </span>
+          </div>
+          <div class="info-panel-item">
+            <span class="info-panel-item-label">Sub-region:</span>
+            <span
+              class="item-panel-item-value"
+              data-bind="text: subregion">
+            </span>
+          </div>
+          <div class="info-panel-item">
+            <span class="info-panel-item-label">Area:</span>
+            <span
+              class="item-panel-item-value"
+              data-bind="text: area">
+            </span>
+          </div>
+          <!-- ko if: languages -->
+          <div class="info-panel-item">
+            <span class="info-panel-item-label">Languages:</span>
+            <span
+              class="item-panel-item-value"
+              data-bind="text: languages">
+            </span>
+          </div>
+          <!-- /ko -->
+          <div class="info-panel-item">
+            <span class="info-panel-item-label">Timezones:</span>
+            <span
+              class="item-panel-item-value"
+              data-bind="text: timezones">
+            </span>
+          </div>
+          <!-- ko if: currencies -->
+          <div class="info-panel-item">
+            <span class="info-panel-item-label">Currencies:</span>
+            <span
+              class="item-panel-item-value"
+              data-bind="text: currencies">
+            </span>
+          </div>
+          <!-- /ko -->
+          <p><small>Country info from: <a href="https://restcountries.eu/" target="_blank">https://restcountries.eu/</a></small></p>
         </div>
-        <!-- ko if: currencies -->
-        <div class="info-panel-item">
-          <span class="info-panel-item-label">Currencies:</span>
-          <span
-            class="item-panel-item-value"
-            data-bind="text: currencies">
-          </span>
-        </div>
-        <!-- /ko -->
-        <p><small>Country info from: <a href="https://restcountries.eu/" target="_blank">https://restcountries.eu/</a></small></p>
       </div>
     </aside>
   </div>
