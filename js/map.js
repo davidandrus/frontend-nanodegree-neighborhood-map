@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  
+
   var resolveFn;
   var GM;
 
@@ -158,6 +158,11 @@
         }
       });
     },
+    /**
+     * Fit the country into the viewport window
+     * @param  {string} id the alpha2code for the country from the restcountries API
+     * @return {undefined}
+     */
     fitToCountry: function(id) {
       var self = this;
       // center map and zoom map to fit the whole country in window
@@ -173,6 +178,8 @@
           bounds.extend(self._markers[id].getPosition());
           self._map.setCenter(results[0].geometry.location);
           self._map.fitBounds(bounds);
+        } else {
+          alert('Unable to obain gecoder data for ' +  self._countries[id].name);
         }
       });
     },
