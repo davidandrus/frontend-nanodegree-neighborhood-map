@@ -20,7 +20,6 @@
    * the global map object
    * @contructor
    */
-
   function Map() {
     this._map = null;
     this._bounds = null;
@@ -137,15 +136,33 @@
      * @return {undefined}
      */
     updatePins: function(items) {
-      // flatten to shape of ['US', 'CO', ...];
-      var visibleIds = _.map(items, function(item) {
-        return item.alpha2Code;
-      });
+      var self = this;
+      this.ready.then(function(){
 
-      // loop through instance markers, if is in the visible
-      // set make visible, otherwise hide
-      _.each(this._markers, function(marker, key) {
-        marker.setVisible(_.includes(visibleIds, key));
+        // flatten to shape of ['US', 'CO', ...];
+        var visibleIds = _.map(items, function(item) {
+          return item.alpha2Code;
+        });
+
+        // create new bounds since we will be updating visiblity
+        self._bounds = new GM.LatLngBounds();
+
+        /**
+         * loop through instance markers, if is in the visible
+         * set make visible, otherwise hide
+         */
+        _.each(self._markers, function(marker, key) {
+          var isVisible = _.includes(visibleIds, key);
+          marker.setVisible(isVisible);
+
+          // extend bounds when visible
+          if (isVisible) {
+            self._bounds.extend(marker.position);
+          }
+        });
+
+        // set to fit filtered set
+        self.fitPins();
       });
     },
     /**
