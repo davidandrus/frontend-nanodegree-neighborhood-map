@@ -18,6 +18,10 @@
     resolveFn();
   }
 
+  function mapErrorCallBack() {
+    alert('there was an issue loading google maps');
+  }
+
   /**
    * the global map object
    * @contructor
@@ -199,5 +203,6 @@
   // expose gMap and initMap as globals
   window.gMap = new Map();
   window.initMap = initMap;
+  window.mapErrorCallBack = mapErrorCallBack;
 
 })(window);

@@ -170,11 +170,12 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/fetch/2.0.2/fetch.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/es6-promise/4.0.5/es6-promise.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
-  <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyAwr7QxnLXALgyvc3vbAqcsRrwJmSWrlIk&callback=initMap" async defer></script>
   <script src="js/mapStyle.js"></script>
   <script src="js/currency.js"></script>
   <script src="js/languages.js"></script>
   <script src="js/map.js"></script>
   <script src="js/app.js"></script>
+  <!-- needs to come after map.js at least since it is calling a function in map.js when loaded -->
+  <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyAwr7QxnLXALgyvc3vbAqcsRrwJmSWrlIk&callback=initMap" onerror="mapErrorCallBack()" async defer></script>
 </body>
 </html>
