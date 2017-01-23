@@ -4,7 +4,7 @@
 
     return _.map(response, function(item) {
       return _.extend({}, item, {
-        flagUrl: '/flags/' +
+        flagUrl: 'img/flags/' +
           item.alpha2Code.toLowerCase() + '.svg',
         languages: item.languages.map(function(code) {
           return languages[code];
@@ -30,10 +30,10 @@
    * @return {Promise} the promise returned with when successful the array of countries
    */
   function getCountries() {
-    return fetch('https://restcountries.eu/rest/v1/all')
+    return fetch('//restcountries.eu/rest/v1/all')
       // if the api is down return the local copy
       .catch(function(response) {
-        return fetch('/allCountries.bu.json');
+        return fetch('js/allCountries.bu.json');
       })
       .then(function(response) {
         return response.json();
@@ -90,7 +90,6 @@
 
     // handle filtering based on countries search input value
     self.filteredCountries = ko.computed(function() {
-      console.log('filtering');
       var countries = self.countries();
       var countryFilter = _.trim(self.countryFilter());
       var filteredCountries;
