@@ -1,10 +1,10 @@
 /*
   https://color.adobe.com/Flat-UI-color-theme-2469224/edit/?copy=true&base=1&rule=Custom&selected=4&name=Copy%20of%20Flat%20UI&mode=rgb&rgbvalues=0.172549,0.243137,0.313725,0.905882,0.298039,0.235294,0.92549,0.941176,0.945098,0.203922,0.596078,0.858824,0.160784,0.501961,0.72549&swatchOrder=0,1,2,3,4
-  #2C3E50 dark blue
-  #E74C3C orange
-  #ECF0F1 cream
-  #3498DB light blue
-  #2980B9 medium blue
+  #2c3350 dark blue
+  #e74c3c orange
+  #ecf0f1 cream
+  #3498db light blue
+  #2980b9 medium blue
 */
 
 /* === Universal */
@@ -13,19 +13,19 @@
 }
 
 body {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-size: 16px;
 }
 
 h1 {
-  color: #2C3E50;
+  color: #2c3350;
 }
 
 a,
 a:visited,
 a:active,
 a:hover {
-  color: #E74C3C;
+  color: #e74c3c;
 }
 
 /* === Shared */
@@ -33,7 +33,7 @@ a:hover {
 .button-pull {
   background: #f1f8fd;
   border-width: 0;
-  color: #2C3E50;
+  color: #2c3350;
   font-size: 30px;
   height: 60px;
   margin: 0;
@@ -57,15 +57,15 @@ a:hover {
 /* == Header */
 
 .header {
-  background: #2C3E50;
-  border-bottom: 1px solid #E74C3C;
+  background: #2c3350;
+  border-bottom: 1px solid #e74c3c;
   height: 60px;
   padding: 0 20px;
   flex:0 0 100vw;
 }
 
 .app-name {
-  color: #ECF0F1;
+  color: #ecf0f1;
   font-size: 24px;
   font-weight: 200;
   line-height: 60px;
@@ -76,7 +76,7 @@ a:hover {
 /* == Sidebar */
 
 .sidebar {
-  background-color: #3498DB;
+  background-color: #3498db;
   display: block;
   left: 0;
   opacity: .9;
@@ -101,15 +101,15 @@ a:hover {
 /* = Filter */
 
 .filter {
-  background-color: #2980B9;
-  border-bottom: 1px solid #ECF0F1;
+  background-color: #2980b9;
+  border-bottom: 1px solid #ecf0f1;
   display: flex;
   height: 60px;
   padding: 10px;
 }
 
 .filter-input {
-  background-color: #ECF0F1;
+  background-color: #ecf0f1;
   border-width: 0;
   flex: 1 1 auto;
   padding: 10px;
@@ -129,12 +129,12 @@ a:hover {
 }
 
 .nav-list li {
-  border-bottom: 1px solid #2980B9;
+  border-bottom: 1px solid #2980b9;
 }
 
 .nav-list a {
-  background-color: #3498DB;
-  color: #ECF0F1;
+  background-color: #3498db;
+  color: #ecf0f1;
   display: block;
   padding: 10px;
   text-decoration: none;
@@ -142,13 +142,13 @@ a:hover {
 }
 
 .nav-list a:hover {
-  background-color: #2980B9;
+  background-color: #2980b9;
 }
 
 .sidebar-error {
-  border: 1px solid #ECF0F1;
-  background-color: #E74C3C;
-  color: #ECF0F1;
+  border: 1px solid #ecf0f1;
+  background-color: #e74c3c;
+  color: #ecf0f1;
   margin: 0 auto;
   padding: 10px;
   text-align: center;
@@ -223,7 +223,7 @@ a:hover {
 }
 
 .info-panel-item-label {
-  color: #2C3E50;
+  color: #2c3350;
   display: inline-block;
   font-weight: bold;
   text-align: right;
@@ -242,8 +242,8 @@ a:hover {
 .loader-spinner {
   animation: rotate360 1s linear infinite;
   border-bottom: 4px solid transparent;
-  border-left: 4px solid #ECF0F1;
-  border-right:  4px solid #ECF0F1;
+  border-left: 4px solid #ecf0f1;
+  border-right:  4px solid #ecf0f1;
   border-radius: 50%;
   border-top: 4px solid transparent;
   bottom: 0;
@@ -311,14 +311,14 @@ a:hover {
   }
 
   .main #map {
-    border-left: 1px solid #E74C3C;
+    border-left: 1px solid #e74c3c;
     height: 50vh;
     right: 0;
     top: 0px;
   }
 
   .info-panel {
-    border-left: 1px solid #E74C3C;
+    border-left: 1px solid #e74c3c;
     bottom: 0px;
     height: 50vh;
     left: 280px;
