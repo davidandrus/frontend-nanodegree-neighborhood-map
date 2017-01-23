@@ -1,6 +1,6 @@
 /*
   https://color.adobe.com/Flat-UI-color-theme-2469224/edit/?copy=true&base=1&rule=Custom&selected=4&name=Copy%20of%20Flat%20UI&mode=rgb&rgbvalues=0.172549,0.243137,0.313725,0.905882,0.298039,0.235294,0.92549,0.941176,0.945098,0.203922,0.596078,0.858824,0.160784,0.501961,0.72549&swatchOrder=0,1,2,3,4
-  #2c3350 dark blue
+  #2c3e50 dark blue
   #e74c3c orange
   #ecf0f1 cream
   #3498db light blue
@@ -18,7 +18,7 @@ body {
 }
 
 h1 {
-  color: #2c3350;
+  color: #2c3e50;
 }
 
 a,
@@ -33,7 +33,7 @@ a:hover {
 .button-pull {
   background: #f1f8fd;
   border-width: 0;
-  color: #2c3350;
+  color: #2c3e50;
   font-size: 30px;
   height: 60px;
   margin: 0;
@@ -57,7 +57,7 @@ a:hover {
 /* == Header */
 
 .header {
-  background: #2c3350;
+  background: #2c3e50;
   border-bottom: 1px solid #e74c3c;
   height: 60px;
   padding: 0 20px;
@@ -223,7 +223,7 @@ a:hover {
 }
 
 .info-panel-item-label {
-  color: #2c3350;
+  color: #2c3e50;
   display: inline-block;
   font-weight: bold;
   text-align: right;
