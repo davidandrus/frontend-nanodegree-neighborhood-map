@@ -43,10 +43,10 @@
       self._bounds = new GM.LatLngBounds();
       self._map = new GM.Map(self._elem, {
         center: { lat: 0, lng: 0 },
-        zoom: 1,
         streetViewControl: false,
         mapTypeControl: false,
         styles: window.mapStyle,
+        zoom: 1,
       });
     },
     /**
@@ -66,21 +66,7 @@
         // if is marker for highlighting
         if (currentObj.alpha2Code === id) {
 
-          // center map and zoom map to fit the whole country in window
-          var geocoder = new GM.Geocoder();
-          geocoder.geocode({
-            componentRestrictions: {
-              country: id
-            },
-          }, function(results, status) {
-            var bounds;
-            if (status == GM.GeocoderStatus.OK) {
-              bounds = results[0].geometry.viewport;
-              bounds.extend(currentMarker.getPosition());
-              self._map.setCenter(results[0].geometry.location);
-              self._map.fitBounds(bounds);
-            }
-          });
+          self.fitToCountry(id);
 
           // set highlight stye and zIndex
           currentMarker.setZIndex(GM.Marker.MAX_ZINDEX + 1);
@@ -145,7 +131,7 @@
         });
 
         // create new bounds since we will be updating visiblity
-        self._bounds = new GM.LatLngBounds();
+        var bounds = new GM.LatLngBounds();
 
         /**
          * loop through instance markers, if is in the visible
@@ -157,22 +143,45 @@
 
           // extend bounds when visible
           if (isVisible) {
-            self._bounds.extend(marker.position);
+            bounds.extend(marker.position);
           }
         });
 
-        // set to fit filtered set
-        self.fitPins();
+        if (visibleIds.length > 1) {
+          // set to fit filtered set
+          self.fitPins(bounds);
+        } else if (visibleIds.length === 1) {
+          // fit to country otherwise will zoom in too much
+          self.fitToCountry(visibleIds[0]);
+        }
+      });
+    },
+    fitToCountry: function(id) {
+      var self = this;
+      // center map and zoom map to fit the whole country in window
+      var geocoder = new GM.Geocoder();
+      geocoder.geocode({
+        componentRestrictions: {
+          country: id
+        },
+      }, function(results, status) {
+        var bounds;
+        if (status == GM.GeocoderStatus.OK) {
+          bounds = results[0].geometry.viewport;
+          bounds.extend(self._markers[id].getPosition());
+          self._map.setCenter(results[0].geometry.location);
+          self._map.fitBounds(bounds);
+        }
       });
     },
     /**
      * update the map to fit all of the visible pins
      * @return {undefined}
      */
-    fitPins: function() {
+    fitPins: function(bounds) {
       var self = this;
       this.ready.then(function() {
-        self._map.fitBounds(self._bounds);
+        self._map.fitBounds(bounds || self._bounds);
       });
     },
     ready: readyPromise,
