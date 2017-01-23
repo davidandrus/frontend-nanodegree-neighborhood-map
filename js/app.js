@@ -1,4 +1,5 @@
 (function(map) {
+  'use strict';
 
   /**
    * Modifies the restcountries API response to add things like languages, currencies and flag

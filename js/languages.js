@@ -1,5 +1,7 @@
 // adapted from http://pastebin.com/raw/ppdMS687 originally at http://stackoverflow.com/a/4900304/1830384
 (function(window) {
+  'use strict';
+
   window.languages = {
     "ab": "Abkhaz",
     "aa": "Afar",

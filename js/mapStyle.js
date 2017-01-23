@@ -1,4 +1,6 @@
 (function(window) {
+  'use strict';
+  
   /** build through the google UI at: https://mapstyle.withgoogle.com/ */
   window.mapStyle = [
     {
