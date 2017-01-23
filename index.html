@@ -15,15 +15,19 @@
     <aside class="sidebar">
       <button
         class="sidebar-pull button-pull"
-        data-bind="event: { click: function(data, event) { toggleView('nav') }}">
-        <img src="img/search.png" alt="search">
+        data-bind="event: { click: function(data, event) { toggleView('nav') }}"
+      >
+        <img
+          src="img/search.png"
+          alt="search"
+        >
       </button>
       <div class="filter">
         <input
-          data-bind="{ textInput: countryFilter }"
           class="filter-input"
-          type="text"
+          data-bind="{ textInput: countryFilter }"
           placeholder="filter by keyword"
+          type="text"
         >
       </div>
       <!-- ko if: countriesLoading -->
@@ -33,7 +37,10 @@
       <!-- /ko -->
       <!-- ko if: countries().length > 0 -->
         <nav class="nav">
-          <ul class="nav-list" data-bind="foreach: filteredCountries">
+          <ul
+            class="nav-list"
+            data-bind="foreach: filteredCountries"
+          >
             <li>
               <a
                 href="#"
@@ -49,7 +56,10 @@
           <p>There was a a problem loading the countries</p>
           <button
             class="sidebar-error-button"
-            data-bind="event: { click: loadCountries }">Retry</button>
+            data-bind="event: { click: loadCountries }"
+          >
+            Retry
+          </button>
         </div>
       <!-- /ko -->
     </aside>
@@ -61,102 +71,101 @@
     </main>
     <aside class="info-panel">
       <!-- ko if: selectedCountry() -->
-      <button
-        class="info-panel-pull button-pull"
-        data-bind="event: { click: function(data, event) { toggleView('infoPanel') }}">
-        <img src="img/orange-dot.png" alt="Pin Info">
-      </button>
+        <button
+          class="info-panel-pull button-pull"
+          data-bind="event: { click: function(data, event) { toggleView('infoPanel') }}"
+        >
+          <img
+            src="img/orange-dot.png"
+            alt="Pin Info"
+          >
+        </button>
       <!--/ko -->
       <div class="info-panel-scroller">
         <!-- ko if: !selectedCountry() -->
-          <h1>Click a pin on the map or fron the sidebar to see more info</h1>
+          <h2 class="info-panel-country">Click a pin on the map or fron the sidebar to see more info</h2>
         <!-- /ko -->
         <div data-bind="with: selectedCountry">
-          <h1 class="info-panel-country" data-bind="text: name"></h1>
+          <h2
+            class="info-panel-country"
+            data-bind="text: name"
+          >
+          </h2>
           <div class="info-panel-content">
             <img
               alt="flag"
               class="info-panel-flag"
-              data-bind="attr: { src: flagUrl }">
-          <div class="info-panel-facts">
-            <div class="info-panel-item">
-              <span class="info-panel-item-label">Capital City:</span>
-              <span
-                class="item-panel-item-value"
-                data-bind="text: capital">
-              </span>
+              data-bind="attr: { src: flagUrl }"
+            >
+            <div class="info-panel-facts">
+              <div class="info-panel-item">
+                <span class="info-panel-item-label">Capital City:</span>
+                <span
+                  class="item-panel-item-value"
+                  data-bind="text: capital">
+                </span>
+              </div>
+              <div class="info-panel-item">
+                <span class="info-panel-item-label">Population:</span>
+                <span
+                  class="item-panel-item-value"
+                  data-bind="text: population">
+                </span>
+              </div>
+              <div class="info-panel-item">
+                <span class="info-panel-item-label">Region:</span>
+                <span
+                  class="item-panel-item-value"
+                  data-bind="text: region">
+                </span>
+              </div>
+              <div class="info-panel-item">
+                <span class="info-panel-item-label">Sub-region:</span>
+                <span
+                  class="item-panel-item-value"
+                  data-bind="text: subregion">
+                </span>
+              </div>
+              <div class="info-panel-item">
+                <span class="info-panel-item-label">Area:</span>
+                <span
+                  class="item-panel-item-value"
+                  data-bind="text: area">
+                </span>
+              </div>
+              <!-- ko if: languages -->
+                <div class="info-panel-item">
+                  <span class="info-panel-item-label">Languages:</span>
+                  <span
+                    class="item-panel-item-value"
+                    data-bind="text: languages">
+                  </span>
+                </div>
+              <!-- /ko -->
+              <div class="info-panel-item">
+                <span class="info-panel-item-label">Timezones:</span>
+                <span
+                  class="item-panel-item-value"
+                  data-bind="text: timezones">
+                </span>
+              </div>
+              <!-- ko if: currencies -->
+                <div class="info-panel-item">
+                  <span class="info-panel-item-label">Currencies:</span>
+                  <span
+                    class="item-panel-item-value"
+                    data-bind="text: currencies"
+                  >
+                  </span>
+                </div>
+              <!-- /ko -->
+              <p><small>Country info from: <a href="https://restcountries.eu/" target="_blank">https://restcountries.eu/</a></small></p>
             </div>
-            <div class="info-panel-item">
-              <span class="info-panel-item-label">Population:</span>
-              <span
-                class="item-panel-item-value"
-                data-bind="text: population">
-              </span>
-            </div>
-            <div class="info-panel-item">
-              <span class="info-panel-item-label">Region:</span>
-              <span
-                class="item-panel-item-value"
-                data-bind="text: region">
-              </span>
-            </div>
-            <div class="info-panel-item">
-              <span class="info-panel-item-label">Sub-region:</span>
-              <span
-                class="item-panel-item-value"
-                data-bind="text: subregion">
-              </span>
-            </div>
-            <div class="info-panel-item">
-              <span class="info-panel-item-label">Area:</span>
-              <span
-                class="item-panel-item-value"
-                data-bind="text: area">
-              </span>
-            </div>
-            <!-- ko if: languages -->
-            <div class="info-panel-item">
-              <span class="info-panel-item-label">Languages:</span>
-              <span
-                class="item-panel-item-value"
-                data-bind="text: languages">
-              </span>
-            </div>
-            <!-- /ko -->
-            <div class="info-panel-item">
-              <span class="info-panel-item-label">Timezones:</span>
-              <span
-                class="item-panel-item-value"
-                data-bind="text: timezones">
-              </span>
-            </div>
-            <!-- ko if: currencies -->
-            <div class="info-panel-item">
-              <span class="info-panel-item-label">Currencies:</span>
-              <span
-                class="item-panel-item-value"
-                data-bind="text: currencies">
-              </span>
-            </div>
-            <!-- /ko -->
-            <p><small>Country info from: <a href="https://restcountries.eu/" target="_blank">https://restcountries.eu/</a></small></p>
           </div>
         </div>
       </div>
     </aside>
   </div>
-
-<!-- https://www.mediawiki.org/wiki/API:Main_page
-https://restcountries.eu/
-http://flags.fmcdn.net/data/flags/normal/jp.png
-http://api.giphy.com/v1/gifs/search?q=finland&api_key=dc6zaTOxFJmzC -->
-<!-- http://www.last.fm/api/show/geo.getTopTracks
-http://sunrise-sunset.org/api
-http://flag-icon-css.lip.is/
-http://stackoverflow.com/questions/2265055/how-to-get-google-maps-api-to-set-the-correct-zoom-level-for-a-country
-http://stackoverflow.com/questions/7095574/google-maps-api-3-custom-marker-color-for-default-dot-marker
--->
-
   <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/fetch/2.0.2/fetch.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/es6-promise/4.0.5/es6-promise.min.js"></script>
